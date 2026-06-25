@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Blended Learning Survey — MVGFC</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --g1:#1B5E20;
+  --g2:#2E7D32;
+  --g3:#388E3C;
+  --g4:#4CAF50;
+  --g5:#A5D6A7;
+  --g6:#E8F5E9;
+  --g7:#F1F8E9;
+  --err:#C62828;
+  --white:#ffffff;
+  --text:#1A1A1A;
+  --muted:#666;
+  --border:#E0E0E0;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 4px 20px rgba(0,0,0,0.08);
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.06);
+}
+
+html,body{
+  height:100%;
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--g7);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+.app{min-height:100vh;display:flex;flex-direction:column}
+
+/* ── Top Bar ── */
+.topbar{
+  background:var(--g2);
+  padding:14px 20px 0;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.topbar-brand{display:flex;align-items:center;gap:10px}
+
+.topbar-logo{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  border:1.5px solid rgba(255,255,255,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;overflow:hidden;flex-shrink:0;
+}
+
+.topbar-name{color:rgba(255,255,255,0.95);font-size:12px;font-weight:700;letter-spacing:0.3px;line-height:1.2}
+.topbar-sub{color:rgba(255,255,255,0.6);font-size:10px}
+
+.step-pill{
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:20px;
+  padding:4px 12px;
+  color:rgba(255,255,255,0.9);
+  font-size:12px;font-weight:700;
+  white-space:nowrap;
+}
+
+/* ── Progress bar (inside topbar) ── */
+.topbar-progress{
+  display:flex;align-items:center;gap:10px;
+  padding-bottom:12px;
+}
+
+.progress-track{
+  flex:1;
+  background:rgba(255,255,255,0.2);
+  border-radius:20px;height:6px;overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:#fff;
+  border-radius:20px;
+  width:0%;
+  transition:width 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+.progress-pct{
+  color:rgba(255,255,255,0.85);
+  font-size:11px;font-weight:700;
+  min-width:32px;text-align:right;
+}
+
+/* ── Pages ── */
+.pages{flex:1;position:relative;overflow:hidden}
+
+.page{
+  position:absolute;top:0;left:0;right:0;
+  padding:24px 20px 100px;
+  opacity:0;
+  transform:translateX(60px);
+  transition:opacity 0.35s ease,transform 0.35s ease;
+  pointer-events:none;
+  min-height:calc(100vh - 96px);
+}
+
+.page.active{opacity:1;transform:translateX(0);pointer-events:all;position:relative}
+.page.exit-left{opacity:0;transform:translateX(-60px);pointer-events:none}
+
+/* ── Step Hero ── */
+.step-hero{text-align:center;margin-bottom:24px}
+.step-emoji{font-size:54px;line-height:1;margin-bottom:12px;display:block}
+.step-title{font-size:22px;font-weight:700;color:var(--g1);margin-bottom:6px;line-height:1.3}
+.step-desc{font-size:13.5px;color:var(--muted);max-width:300px;margin:0 auto}
+
+/* ── Milestone dots ── */
+.milestones{
+  display:flex;justify-content:center;
+  align-items:center;gap:6px;
+  margin-bottom:20px;
+}
+
+.milestone{
+  height:6px;border-radius:20px;
+  background:var(--border);
+  transition:all 0.35s ease;
+  flex:1;max-width:40px;
+}
+
+.milestone.done{background:var(--g4)}
+.milestone.active{background:var(--g2);box-shadow:0 0 0 2px rgba(46,125,50,0.2)}
+
+/* ── Cards ── */
+.card{
+  background:var(--white);border-radius:var(--radius);
+  border:1px solid var(--border);padding:20px;
+  margin-bottom:16px;box-shadow:var(--shadow-sm);
+}
+
+.card.privacy{
+  border-left:4px solid var(--g2);
+  background:var(--g6);border-color:var(--g5);
+}
+
+/* ── Privacy ── */
+.privacy-text{
+  font-size:13px;color:#444;line-height:1.7;
+  background:var(--white);padding:12px 14px;
+  border-radius:var(--radius-sm);border:1px solid var(--g5);
+  margin-bottom:14px;
+}
+
+.privacy-label{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13.5px;color:var(--text);cursor:pointer;line-height:1.5;
+}
+
+.privacy-label input{
+  accent-color:var(--g2);width:16px;height:16px;
+  margin-top:2px;flex-shrink:0;
+}
+
+/* ── Fields ── */
+.field{margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+
+.field-label{
+  font-size:13px;font-weight:700;color:#333;
+  margin-bottom:6px;display:block;
+}
+
+.field-label .req{color:var(--err);margin-left:2px}
+.field-hint{font-size:12px;color:var(--muted);margin-bottom:8px}
+
+input[type=text],select{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  font-size:14px;font-family:inherit;color:var(--text);
+  background:var(--white);
+  transition:border-color 0.2s,box-shadow 0.2s;
+  -webkit-appearance:none;appearance:none;
+}
+
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:40px;cursor:pointer;
+}
+
+input[type=text]:focus,select:focus{
+  outline:none;border-color:var(--g4);
+  box-shadow:0 0 0 3px rgba(76,175,80,0.18);
+}
+
+.field.has-error input[type=text],
+.field.has-error select{border-color:var(--err)}
+.field.has-error .choice-grid .choice-card{border-color:var(--err)}
+
+.err-msg{font-size:12px;color:var(--err);margin-top:5px;display:none}
+.field.has-error .err-msg{display:block}
+
+/* ── Toggle ── */
+.toggle-group{display:flex;gap:8px}
+
+.toggle-btn{
+  flex:1;padding:10px;
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  background:var(--white);color:var(--muted);
+  font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:all 0.15s;
+}
+
+.toggle-btn:hover{background:var(--g6);border-color:var(--g4)}
+.toggle-btn.active{background:var(--g2);color:var(--white);border-color:var(--g2)}
+
+.reveal-block{
+  display:none;margin-top:12px;padding:14px;
+  background:var(--g6);border-radius:var(--radius-sm);border:1px solid var(--g5);
+}
+
+/* ── Choice Grid ── */
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-grid.single-col{grid-template-columns:1fr}
+
+.choice-card{
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  padding:12px 14px;cursor:pointer;
+  display:flex;align-items:center;gap:10px;
+  transition:all 0.18s;background:var(--white);
+  position:relative;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.choice-card:active{transform:scale(0.97)}
+
+.choice-card.selected{
+  background:var(--g6);border-color:var(--g2);
+  box-shadow:0 0 0 2px rgba(46,125,50,0.15);
+}
+
+.choice-card input[type=radio],
+.choice-card input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}
+
+.choice-icon{font-size:22px;line-height:1;flex-shrink:0}
+.choice-text{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3}
+
+.choice-check{
+  margin-left:auto;width:20px;height:20px;
+  border-radius:50%;border:2px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;
+}
+
+.choice-card.selected .choice-check{background:var(--g2);border-color:var(--g2)}
+
+.choice-check::after{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--white);opacity:0;transition:opacity 0.15s;
+}
+
+.choice-card.selected .choice-check::after{opacity:1}
+
+.choice-check.sq{border-radius:5px}
+.choice-check.sq::after{
+  content:'✓';font-size:11px;font-weight:700;
+  color:var(--white);background:none;width:auto;height:auto;border-radius:0;
+}
+
+.other-input{
+  display:none;margin-top:8px;width:100%;
+  padding:10px 14px;border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);font-size:14px;font-family:inherit;
+  color:var(--text);background:var(--white);
+}
+
+.other-input:focus{
+  outline:none;border-color:var(--g4);
+  box-shadow:0 0 0 3px rgba(76,175,80,0.18);
+}
+
+/* ── Bottom Nav ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--white);border-top:1px solid var(--border);
+  padding:12px 20px;display:flex;gap:10px;
+  z-index:100;box-shadow:0 -4px 16px rgba(0,0,0,0.06);
+}
+
+.btn-back{
+  flex:0 0 auto;padding:12px 20px;
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  background:var(--white);color:var(--muted);
+  font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:all 0.15s;display:flex;align-items:center;gap:6px;
+}
+
+.btn-back:hover{background:var(--g6);border-color:var(--g5)}
+.btn-back:disabled{opacity:0.3;pointer-events:none}
+
+.btn-next{
+  flex:1;padding:13px;border:none;border-radius:var(--radius-sm);
+  background:var(--g2);color:var(--white);
+  font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;
+  transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 12px rgba(46,125,50,0.3);
+}
+
+.btn-next:hover{background:var(--g1)}
+.btn-next:active{transform:scale(0.98)}
+.btn-next:disabled{background:var(--g5);box-shadow:none;cursor:not-allowed}
+
+/* ── Spinner ── */
+.spinner{
+  width:18px;height:18px;
+  border:2px solid rgba(255,255,255,0.4);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin 0.7s linear infinite;display:none;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Error banner ── */
+.err-banner{
+  display:none;background:#FFEBEE;
+  border:1px solid #FFCDD2;border-radius:var(--radius-sm);
+  padding:12px 14px;font-size:13px;color:var(--err);
+  margin-top:12px;text-align:center;
+}
+
+/* ── Success Page ── */
+.success-wrap{text-align:center;padding:0 0 40px}
+
+.trophy{
+  font-size:72px;line-height:1;margin-bottom:16px;display:block;
+  animation:pop 0.5s cubic-bezier(.4,0,.2,1) 0.2s both;
+}
+
+@keyframes pop{
+  0%{transform:scale(0.5);opacity:0}
+  70%{transform:scale(1.1)}
+  100%{transform:scale(1);opacity:1}
+}
+
+.success-title{font-size:24px;font-weight:700;color:var(--g1);margin-bottom:8px}
+
+.success-msg{
+  font-size:14px;color:var(--muted);
+  max-width:300px;margin:0 auto 28px;line-height:1.7;
+}
+
+.score-card{
+  background:var(--white);border-radius:var(--radius);
+  border:1px solid var(--border);padding:20px;
+  margin-bottom:16px;box-shadow:var(--shadow-sm);text-align:left;
+}
+
+.score-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid #F5F5F5;font-size:13.5px;
+}
+
+.score-row:last-child{border-bottom:none}
+.score-label{color:var(--muted)}
+.score-val{font-weight:700;color:var(--g2)}
+
+/* ── Confetti ── */
+.confetti{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  pointer-events:none;z-index:300;overflow:hidden;
+}
+
+.confetti-piece{
+  position:absolute;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+@media(max-width:400px){
+  .choice-grid{grid-template-columns:1fr}
+  .step-title{font-size:20px}
+  .page{padding:20px 16px 100px}
+  .topbar{padding:12px 16px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="confetti" id="confetti"></div>
+
+<div class="app">
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-brand">
+        <div class="topbar-logo">
+          <!--
+            Replace emoji with your logo:
+            <img src="mvgfc-logo.png" alt="MVGFC" style="width:26px;height:26px;object-fit:contain;">
+          -->
+          🎓
+        </div>
+        <div>
+          <div class="topbar-name">MVGFC</div>
+          <div class="topbar-sub">Blended Learning Survey</div>
+        </div>
+      </div>
+      <div class="step-pill" id="step-pill">Step 1 of 5</div>
+    </div>
+    <div class="topbar-progress">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-pct" id="progress-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- Pages -->
+  <div class="pages">
+
+    <!-- PAGE 0 — Privacy -->
+    <div class="page active" id="page-0">
+      <div class="step-hero">
+        <span class="step-emoji">👋</span>
+        <div class="step-title">Welcome, Scholar!</div>
+        <div class="step-desc">This quick survey helps MVGFC prepare the best blended learning experience for you.</div>
+      </div>
+
+      <div class="milestones">
+        <div class="milestone active"></div>
+        <div class="milestone"></div>
+        <div class="milestone"></div>
+        <div class="milestone"></div>
+        <div class="milestone"></div>
+      </div>
+
+      <div class="card privacy">
+        <div style="font-size:13px;font-weight:700;color:var(--g1);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+          🔒 Data Privacy Notice
+        </div>
+        <p class="privacy-text">
+          The information collected in this survey will be used solely for educational planning and assessment purposes.
+          All data will be treated confidentially and in accordance with applicable data privacy regulations.
+        </p>
+        <div class="field" id="field-privacy">
+          <label class="privacy-label">
+            <input type="checkbox" id="privacy-agree">
+            <span>I have read and agree to the Data Privacy Notice.</span>
+          </label>
+          <div class="err-msg">Please agree to continue.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 1 — Profile -->
+    <div class="page" id="page-1">
+      <div class="step-hero">
+        <span class="step-emoji">🧑‍🎓</span>
+        <div class="step-title">Your Profile</div>
+        <div class="step-desc">Tell us a little about yourself.</div>
+      </div>
+
+      <div class="milestones">
+        <div class="milestone done"></div>
+        <div class="milestone active"></div>
+        <div class="milestone"></div>
+        <div class="milestone"></div>
+        <div class="milestone"></div>
+      </div>
+
+      <div class="card">
+        <div class="field" id="field-name">
+          <label class="field-label" for="full-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="full-name" placeholder="e.g. Juan Dela Cruz" autocomplete="name">
+          <div class="err-msg">Please enter your full name.</div>
+        </div>
+
+        <div class="field" id="field-level">
+          <label class="field-label" for="edu-level">Educational Level <span class="req">*</span></label>
+          <select id="edu-level">
+            <option value="">— Select your level —</option>
+            <optgroup label="Junior High School">
+              <option>Grade 7</option><option>Grade 8</option>
+              <option>Grade 9</option><option>Grade 10</option>
+            </optgroup>
+            <optgroup label="Senior High School">
+              <option>Grade 11</option><option>Grade 12</option>
+            </optgroup>
+            <optgroup label="College">
+              <option>1st Year College</option><option>2nd Year College</option>
+              <option>3rd Year College</option><option>4th Year College</option>
+            </optgroup>
+          </select>
+          <div class="err-msg">Please select your level.</div>
+        </div>
+
+        <div class="field" id="field-transferee">
+          <div class="field-label">Are you a transferee? <span class="req">*</span></div>
+          <div class="toggle-group">
+            <button type="button" class="toggle-btn" id="tr-yes" onclick="setTransferee('yes')">✈️ Yes</button>
+            <button type="button" class="toggle-btn" id="tr-no"  onclick="setTransferee('no')">🏫 No</button>
+          </div>
+          <div class="reveal-block" id="transferee-block">
+            <div class="field" id="field-prev-school" style="margin-bottom:0">
+              <label class="field-label" for="prev-school">Previous School <span class="req">*</span></label>
+              <input type="text" id="prev-school" placeholder="Enter your previous school">
+              <div class="err-msg">Previous school name is required.</div>
+            </div>
+          </div>
+          <div class="err-msg" id="transferee-err">Please indicate if you are a transferee.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2 — Devices -->
+    <div class="page" id="page-2">
+      <div class="step-hero">
+        <span class="step-emoji">📱</span>
+        <div class="step-title">Your Devices</div>
+        <div class="step-desc">What gadgets do you have for learning?</div>
+      </div>
+
+      <div class="milestones">
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone active"></div>
+        <div class="milestone"></div>
+        <div class="milestone"></div>
+      </div>
+
+      <div class="card">
+        <div class="field" id="field-devices">
+          <div class="field-label">Select all that apply <span class="req">*</span></div>
+          <div class="field-hint">Tap everything you have at home 👇</div>
+          <div class="choice-grid" id="devices-group">
+            <div class="choice-card" onclick="toggleCheck(this,'cb-phone')">
+              <input type="checkbox" id="cb-phone" name="devices" value="Mobile Phone">
+              <span class="choice-icon">📱</span>
+              <span class="choice-text">Mobile Phone</span>
+              <span class="choice-check sq"></span>
+            </div>
+            <div class="choice-card" onclick="toggleCheck(this,'cb-laptop')">
+              <input type="checkbox" id="cb-laptop" name="devices" value="Laptop">
+              <span class="choice-icon">💻</span>
+              <span class="choice-text">Laptop</span>
+              <span class="choice-check sq"></span>
+            </div>
+            <div class="choice-card" onclick="toggleCheck(this,'cb-desktop')">
+              <input type="checkbox" id="cb-desktop" name="devices" value="Desktop Computer">
+              <span class="choice-icon">🖥️</span>
+              <span class="choice-text">Desktop</span>
+              <span class="choice-check sq"></span>
+            </div>
+            <div class="choice-card" onclick="toggleCheck(this,'cb-tablet')">
+              <input type="checkbox" id="cb-tablet" name="devices" value="Tablet/iPad">
+              <span class="choice-icon">📟</span>
+              <span class="choice-text">Tablet / iPad</span>
+              <span class="choice-check sq"></span>
+            </div>
+            <div class="choice-card" onclick="toggleCheck(this,'cb-dev-other')">
+              <input type="checkbox" id="cb-dev-other" name="devices" value="Others" onchange="toggleOther('cb-dev-other','dev-other-input')">
+              <span class="choice-icon">🔧</span>
+              <span class="choice-text">Others</span>
+              <span class="choice-check sq"></span>
+            </div>
+          </div>
+          <input type="text" class="other-input" id="dev-other-input" placeholder="Specify your device...">
+          <div class="err-msg">Please select at least one device.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3 — Internet -->
+    <div class="page" id="page-3">
+      <div class="step-hero">
+        <span class="step-emoji">📡</span>
+        <div class="step-title">Internet Access</div>
+        <div class="step-desc">Tell us about your connection at home.</div>
+      </div>
+
+      <div class="milestones">
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone active"></div>
+        <div class="milestone"></div>
+      </div>
+
+      <div class="card">
+        <div class="field" id="field-internet">
+          <div class="field-label">Main source of internet connection? <span class="req">*</span></div>
+          <div class="choice-grid" id="internet-group">
+            <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-wifi')">
+              <input type="radio" id="rb-wifi" name="internet" value="Wi-Fi">
+              <span class="choice-icon">📶</span>
+              <span class="choice-text">Wi-Fi</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-data')">
+              <input type="radio" id="rb-data" name="internet" value="Mobile Data">
+              <span class="choice-icon">📲</span>
+              <span class="choice-text">Mobile Data</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-pocket')">
+              <input type="radio" id="rb-pocket" name="internet" value="Pocket Wi-Fi">
+              <span class="choice-icon">📦</span>
+              <span class="choice-text">Pocket Wi-Fi</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-int-other')">
+              <input type="radio" id="rb-int-other" name="internet" value="Others" onchange="toggleOther('rb-int-other','int-other-input')">
+              <span class="choice-icon">🔌</span>
+              <span class="choice-text">Others</span>
+              <span class="choice-check"></span>
+            </div>
+          </div>
+          <input type="text" class="other-input" id="int-other-input" placeholder="Specify your connection...">
+          <div class="err-msg">Please select your internet source.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field" id="field-reliability">
+          <div class="field-label">How reliable is your connection? <span class="req">*</span></div>
+          <div class="choice-grid single-col" id="reliability-group">
+            <div class="choice-card" onclick="pickRadio(this,'reliability-group','rb-vrel')">
+              <input type="radio" id="rb-vrel" name="reliability" value="Very Reliable">
+              <span class="choice-icon">🟢</span>
+              <span class="choice-text">Very Reliable — Always connected, fast</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'reliability-group','rb-rel')">
+              <input type="radio" id="rb-rel" name="reliability" value="Reliable">
+              <span class="choice-icon">🟡</span>
+              <span class="choice-text">Reliable — Mostly works, occasional drops</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'reliability-group','rb-unrel')">
+              <input type="radio" id="rb-unrel" name="reliability" value="Unreliable">
+              <span class="choice-icon">🔴</span>
+              <span class="choice-text">Unreliable — Frequent disconnections</span>
+              <span class="choice-check"></span>
+            </div>
+          </div>
+          <div class="err-msg">Please rate your connection.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4 — Learning Readiness -->
+    <div class="page" id="page-4">
+      <div class="step-hero">
+        <span class="step-emoji">🚀</span>
+        <div class="step-title">Almost Done!</div>
+        <div class="step-desc">Just two more quick questions.</div>
+      </div>
+
+      <div class="milestones">
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone active"></div>
+      </div>
+
+      <div class="card">
+        <div class="field" id="field-platforms">
+          <div class="field-label">Do you know how to use online learning platforms? <span class="req">*</span></div>
+          <div class="field-hint">e.g. Google Classroom, Moodle, MS Teams</div>
+          <div class="choice-grid" id="platforms-group">
+            <div class="choice-card" onclick="pickRadio(this,'platforms-group','rb-plt-yes')">
+              <input type="radio" id="rb-plt-yes" name="platforms" value="Yes">
+              <span class="choice-icon">✅</span>
+              <span class="choice-text">Yes, I do!</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'platforms-group','rb-plt-no')">
+              <input type="radio" id="rb-plt-no" name="platforms" value="No">
+              <span class="choice-icon">🤔</span>
+              <span class="choice-text">Not yet</span>
+              <span class="choice-check"></span>
+            </div>
+          </div>
+          <div class="err-msg">Please answer this question.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="field" id="field-quiet">
+          <div class="field-label">Do you have a quiet place to study at home? <span class="req">*</span></div>
+          <div class="choice-grid" id="quiet-group">
+            <div class="choice-card" onclick="pickRadio(this,'quiet-group','rb-q-yes')">
+              <input type="radio" id="rb-q-yes" name="quiet" value="Yes">
+              <span class="choice-icon">🤫</span>
+              <span class="choice-text">Yes, I do!</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'quiet-group','rb-q-no')">
+              <input type="radio" id="rb-q-no" name="quiet" value="No">
+              <span class="choice-icon">🏠</span>
+              <span class="choice-text">Not really</span>
+              <span class="choice-check"></span>
+            </div>
+          </div>
+          <div class="err-msg">Please answer this question.</div>
+        </div>
+      </div>
+
+      <div class="err-banner" id="err-banner">
+        Something went wrong. Please check your connection and try again.
+      </div>
+    </div>
+
+    <!-- PAGE 5 — Success -->
+    <div class="page" id="page-5">
+      <div class="success-wrap">
+        <span class="trophy">🏆</span>
+        <div class="success-title">Survey Complete!</div>
+        <p class="success-msg">
+          Thank you for completing the<br>
+          <strong>Student Readiness for Blended Learning Survey.</strong><br><br>
+          Your response has been recorded!
+        </p>
+
+        <div class="score-card">
+          <div style="font-size:13px;font-weight:700;color:var(--g1);margin-bottom:12px;">🎯 Your Summary</div>
+          <div class="score-row">
+            <span class="score-label">Name</span>
+            <span class="score-val" id="final-name">—</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">Level</span>
+            <span class="score-val" id="final-level">—</span>
+          </div>
+          <div class="score-row">
+            <span class="score-label">Steps Completed</span>
+            <span class="score-val">5 / 5 ✅</span>
+          </div>
+        </div>
+
+        <div style="font-size:13px;color:var(--muted);line-height:1.7;padding:0 8px;">
+          MVGFC will use your responses to design a better blended learning experience for everyone. 💚
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pages -->
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav" id="bottom-nav">
+    <button class="btn-back" id="btn-back" onclick="goBack()" disabled>← Back</button>
+    <button class="btn-next" id="btn-next" onclick="goNext()">
+      <div class="spinner" id="spinner"></div>
+      <span id="next-label">Let's Go! →</span>
+    </button>
+  </div>
+
+</div>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSTWeDd9CMjSFIQ0MpGAxYszISIJsRLHbnLNuI40S7-peVHjAOxLlWR_NHLsxxnBf3fA/exec';
+
+let currentPage = 0;
+const TOTAL_STEPS = 5;
+let transfereeVal = null;
+
+function updateTopBar() {
+  const isSuccess = currentPage === TOTAL_STEPS;
+  const pct = Math.round((currentPage / TOTAL_STEPS) * 100);
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent  = pct + '%';
+  document.getElementById('step-pill').textContent =
+    isSuccess ? 'Complete! 🎉' : 'Step ' + (currentPage + 1) + ' of ' + TOTAL_STEPS;
+
+  document.getElementById('btn-back').disabled = currentPage === 0;
+  document.getElementById('bottom-nav').style.display = isSuccess ? 'none' : 'flex';
+
+  const label = document.getElementById('next-label');
+  if (currentPage === TOTAL_STEPS - 1) label.textContent = '🚀 Submit Survey';
+  else if (currentPage === 0)          label.textContent = "Let's Go! →";
+  else                                 label.textContent = 'Next →';
+}
+
+function showPage(next) {
+  const cur = document.getElementById('page-' + currentPage);
+  const tgt = document.getElementById('page-' + next);
+  cur.classList.remove('active');
+  cur.classList.add('exit-left');
+  setTimeout(() => cur.classList.remove('exit-left'), 400);
+  tgt.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  currentPage = next;
+  updateTopBar();
+}
+
+function goBack() { if (currentPage > 0) showPage(currentPage - 1); }
+
+async function goNext() {
+  if (!validatePage(currentPage)) return;
+  if (currentPage === TOTAL_STEPS - 1) { await submitSurvey(); return; }
+  showPage(currentPage + 1);
+}
+
+function setTransferee(v) {
+  transfereeVal = v;
+  document.getElementById('tr-yes').classList.toggle('active', v === 'yes');
+  document.getElementById('tr-no').classList.toggle('active',  v === 'no');
+  document.getElementById('transferee-block').style.display = v === 'yes' ? 'block' : 'none';
+  if (v !== 'yes') document.getElementById('prev-school').value = '';
+  clearErr('field-transferee');
+  document.getElementById('transferee-err').style.display = 'none';
+}
+
+function toggleCheck(card, cbId) {
+  const cb = document.getElementById(cbId);
+  cb.checked = !cb.checked;
+  card.classList.toggle('selected', cb.checked);
+  cb.dispatchEvent(new Event('change'));
+}
+
+function pickRadio(card, groupId, rbId) {
+  document.querySelectorAll('#' + groupId + ' .choice-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  const rb = document.getElementById(rbId);
+  rb.checked = true;
+  rb.dispatchEvent(new Event('change'));
+}
+
+function toggleOther(inputId, textId) {
+  const el  = document.getElementById(inputId);
+  const txt = document.getElementById(textId);
+  if (!el || !txt) return;
+  txt.style.display = el.checked ? 'block' : 'none';
+  if (!el.checked) txt.value = '';
+}
+
+function setErr(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('has-error', show);
+}
+
+function clearErr(id) { setErr(id, false); }
+
+function validatePage(page) {
+  let ok = true;
+
+  if (page === 0) {
+    const agreed = document.getElementById('privacy-agree').checked;
+    setErr('field-privacy', !agreed);
+    if (!agreed) ok = false;
+  }
+
+  if (page === 1) {
+    const name  = document.getElementById('full-name').value.trim();
+    const level = document.getElementById('edu-level').value;
+    setErr('field-name',  !name);
+    setErr('field-level', !level);
+    if (!name || !level) ok = false;
+
+    if (!transfereeVal) {
+      document.getElementById('field-transferee').classList.add('has-error');
+      document.getElementById('transferee-err').style.display = 'block';
+      ok = false;
+    } else {
+      clearErr('field-transferee');
+      document.getElementById('transferee-err').style.display = 'none';
+    }
+
+    if (transfereeVal === 'yes') {
+      const prev = document.getElementById('prev-school').value.trim();
+      setErr('field-prev-school', !prev);
+      if (!prev) ok = false;
+    }
+  }
+
+  if (page === 2) {
+    const any = document.querySelectorAll('[name="devices"]:checked').length > 0;
+    setErr('field-devices', !any);
+    if (!any) ok = false;
+  }
+
+  if (page === 3) {
+    const net = !!document.querySelector('[name="internet"]:checked');
+    const rel = !!document.querySelector('[name="reliability"]:checked');
+    setErr('field-internet',    !net);
+    setErr('field-reliability', !rel);
+    if (!net || !rel) ok = false;
+  }
+
+  if (page === 4) {
+    const plt = !!document.querySelector('[name="platforms"]:checked');
+    const qut = !!document.querySelector('[name="quiet"]:checked');
+    setErr('field-platforms', !plt);
+    setErr('field-quiet',     !qut);
+    if (!plt || !qut) ok = false;
+  }
+
+  if (!ok) {
+    const first = document.querySelector('#page-' + page + ' .has-error');
+    if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  return ok;
+}
+
+function buildPayload() {
+  const devices = Array.from(document.querySelectorAll('[name="devices"]:checked')).map(d => {
+    if (d.value === 'Others') {
+      const o = document.getElementById('dev-other-input').value.trim();
+      return o ? 'Others: ' + o : 'Others';
+    }
+    return d.value;
+  });
+
+  const intRb = document.querySelector('[name="internet"]:checked');
+  let internetSource = intRb ? intRb.value : '';
+  if (internetSource === 'Others') {
+    const o = document.getElementById('int-other-input').value.trim();
+    internetSource = o ? 'Others: ' + o : 'Others';
+  }
+
+  return {
+    fullName:            document.getElementById('full-name').value.trim(),
+    educationalLevel:    document.getElementById('edu-level').value,
+    isTransferee:        transfereeVal,
+    previousSchool:      transfereeVal === 'yes' ? document.getElementById('prev-school').value.trim() : null,
+    devices,
+    internetSource,
+    internetReliability: document.querySelector('[name="reliability"]:checked')?.value || '',
+    knowsPlatforms:      document.querySelector('[name="platforms"]:checked')?.value || '',
+    hasQuietPlace:       document.querySelector('[name="quiet"]:checked')?.value || '',
+    submittedAt:         new Date().toISOString()
+  };
+}
+
+async function submitSurvey() {
+  const btn    = document.getElementById('btn-next');
+  const spin   = document.getElementById('spinner');
+  const label  = document.getElementById('next-label');
+  const banner = document.getElementById('err-banner');
+
+  btn.disabled = true;
+  spin.style.display = 'block';
+  label.textContent  = 'Submitting...';
+  banner.style.display = 'none';
+
+  const payload = buildPayload();
+
+  // ============================================================
+  // DATABASE SAVE — Google Sheets via Apps Script
+  // Replace APPS_SCRIPT_URL at the top with your deployed URL.
+  // ============================================================
+  try {
+    const res    = await fetch(APPS_SCRIPT_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(payload)
+    });
+    const result = await res.json();
+    if (result.status !== 'success') throw new Error(result.message);
+
+    document.getElementById('final-name').textContent  = payload.fullName;
+    document.getElementById('final-level').textContent = payload.educationalLevel;
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-pct').textContent  = '100%';
+
+    showPage(5);
+    launchConfetti();
+
+  } catch (err) {
+    console.error(err);
+    banner.style.display = 'block';
+    btn.disabled = false;
+    spin.style.display = 'none';
+    label.textContent  = '🚀 Submit Survey';
+  }
+  // ============================================================
+  // END DATABASE SAVE
+  // ============================================================
+}
+
+function launchConfetti() {
+  const container = document.getElementById('confetti');
+  const colors = ['#4CAF50','#FFD54F','#FF8F00','#2E7D32','#A5D6A7','#C8E6C9'];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${6+Math.random()*6}px;height:${6+Math.random()*6}px;
+      border-radius:${Math.random()>.5?'50%':'2px'};
+      animation-duration:${1.5+Math.random()*2}s;
+      animation-delay:${Math.random()*.6}s;
+    `;
+    container.appendChild(el);
+  }
+  setTimeout(() => container.innerHTML = '', 4000);
+}
+
+updateTopBar();
+</script>
+</body>
+</html>
