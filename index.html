@@ -38,7 +38,6 @@ html,body{
 
 .app{min-height:100vh;display:flex;flex-direction:column}
 
-/* ── Top Bar ── */
 .topbar{
   background:var(--g2);
   padding:14px 20px 0;
@@ -47,8 +46,7 @@ html,body{
 }
 
 .topbar-inner{
-  display:flex;
-  align-items:center;
+  display:flex;align-items:center;
   justify-content:space-between;
   margin-bottom:12px;
 }
@@ -56,8 +54,7 @@ html,body{
 .topbar-brand{display:flex;align-items:center;gap:10px}
 
 .topbar-logo{
-  width:36px;height:36px;
-  border-radius:50%;
+  width:36px;height:36px;border-radius:50%;
   background:rgba(255,255,255,0.2);
   border:1.5px solid rgba(255,255,255,0.4);
   display:flex;align-items:center;justify-content:center;
@@ -70,31 +67,24 @@ html,body{
 .step-pill{
   background:rgba(255,255,255,0.15);
   border:1px solid rgba(255,255,255,0.25);
-  border-radius:20px;
-  padding:4px 12px;
+  border-radius:20px;padding:4px 12px;
   color:rgba(255,255,255,0.9);
-  font-size:12px;font-weight:700;
-  white-space:nowrap;
+  font-size:12px;font-weight:700;white-space:nowrap;
 }
 
-/* ── Progress bar (inside topbar) ── */
 .topbar-progress{
   display:flex;align-items:center;gap:10px;
   padding-bottom:12px;
 }
 
 .progress-track{
-  flex:1;
-  background:rgba(255,255,255,0.2);
+  flex:1;background:rgba(255,255,255,0.2);
   border-radius:20px;height:6px;overflow:hidden;
 }
 
 .progress-fill{
-  height:100%;
-  background:#fff;
-  border-radius:20px;
-  width:0%;
-  transition:width 0.5s cubic-bezier(.4,0,.2,1);
+  height:100%;background:#fff;border-radius:20px;
+  width:0%;transition:width 0.5s cubic-bezier(.4,0,.2,1);
 }
 
 .progress-pct{
@@ -103,14 +93,12 @@ html,body{
   min-width:32px;text-align:right;
 }
 
-/* ── Pages ── */
 .pages{flex:1;position:relative;overflow:hidden}
 
 .page{
   position:absolute;top:0;left:0;right:0;
   padding:24px 20px 100px;
-  opacity:0;
-  transform:translateX(60px);
+  opacity:0;transform:translateX(60px);
   transition:opacity 0.35s ease,transform 0.35s ease;
   pointer-events:none;
   min-height:calc(100vh - 96px);
@@ -119,17 +107,14 @@ html,body{
 .page.active{opacity:1;transform:translateX(0);pointer-events:all;position:relative}
 .page.exit-left{opacity:0;transform:translateX(-60px);pointer-events:none}
 
-/* ── Step Hero ── */
 .step-hero{text-align:center;margin-bottom:24px}
 .step-emoji{font-size:54px;line-height:1;margin-bottom:12px;display:block}
 .step-title{font-size:22px;font-weight:700;color:var(--g1);margin-bottom:6px;line-height:1.3}
 .step-desc{font-size:13.5px;color:var(--muted);max-width:300px;margin:0 auto}
 
-/* ── Milestone dots ── */
 .milestones{
   display:flex;justify-content:center;
-  align-items:center;gap:6px;
-  margin-bottom:20px;
+  align-items:center;gap:6px;margin-bottom:20px;
 }
 
 .milestone{
@@ -142,7 +127,6 @@ html,body{
 .milestone.done{background:var(--g4)}
 .milestone.active{background:var(--g2);box-shadow:0 0 0 2px rgba(46,125,50,0.2)}
 
-/* ── Cards ── */
 .card{
   background:var(--white);border-radius:var(--radius);
   border:1px solid var(--border);padding:20px;
@@ -154,7 +138,6 @@ html,body{
   background:var(--g6);border-color:var(--g5);
 }
 
-/* ── Privacy ── */
 .privacy-text{
   font-size:13px;color:#444;line-height:1.7;
   background:var(--white);padding:12px 14px;
@@ -172,7 +155,6 @@ html,body{
   margin-top:2px;flex-shrink:0;
 }
 
-/* ── Fields ── */
 .field{margin-bottom:16px}
 .field:last-child{margin-bottom:0}
 
@@ -211,7 +193,6 @@ input[type=text]:focus,select:focus{
 .err-msg{font-size:12px;color:var(--err);margin-top:5px;display:none}
 .field.has-error .err-msg{display:block}
 
-/* ── Toggle ── */
 .toggle-group{display:flex;gap:8px}
 
 .toggle-btn{
@@ -230,7 +211,7 @@ input[type=text]:focus,select:focus{
   background:var(--g6);border-radius:var(--radius-sm);border:1px solid var(--g5);
 }
 
-/* ── Choice Grid ── */
+/* Single column choice grid for longer option text */
 .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .choice-grid.single-col{grid-template-columns:1fr}
 
@@ -253,8 +234,8 @@ input[type=text]:focus,select:focus{
 .choice-card input[type=radio],
 .choice-card input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}
 
-.choice-icon{font-size:22px;line-height:1;flex-shrink:0}
-.choice-text{font-size:13.5px;font-weight:500;color:var(--text);line-height:1.3}
+.choice-icon{font-size:20px;line-height:1;flex-shrink:0}
+.choice-text{font-size:13px;font-weight:500;color:var(--text);line-height:1.35}
 
 .choice-check{
   margin-left:auto;width:20px;height:20px;
@@ -290,7 +271,6 @@ input[type=text]:focus,select:focus{
   box-shadow:0 0 0 3px rgba(76,175,80,0.18);
 }
 
-/* ── Bottom Nav ── */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;
   background:var(--white);border-top:1px solid var(--border);
@@ -321,7 +301,6 @@ input[type=text]:focus,select:focus{
 .btn-next:active{transform:scale(0.98)}
 .btn-next:disabled{background:var(--g5);box-shadow:none;cursor:not-allowed}
 
-/* ── Spinner ── */
 .spinner{
   width:18px;height:18px;
   border:2px solid rgba(255,255,255,0.4);
@@ -331,7 +310,6 @@ input[type=text]:focus,select:focus{
 
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── Error banner ── */
 .err-banner{
   display:none;background:#FFEBEE;
   border:1px solid #FFCDD2;border-radius:var(--radius-sm);
@@ -339,7 +317,6 @@ input[type=text]:focus,select:focus{
   margin-top:12px;text-align:center;
 }
 
-/* ── Success Page ── */
 .success-wrap{text-align:center;padding:0 0 40px}
 
 .trophy{
@@ -375,16 +352,12 @@ input[type=text]:focus,select:focus{
 .score-label{color:var(--muted)}
 .score-val{font-weight:700;color:var(--g2)}
 
-/* ── Confetti ── */
 .confetti{
   position:fixed;top:0;left:0;right:0;bottom:0;
   pointer-events:none;z-index:300;overflow:hidden;
 }
 
-.confetti-piece{
-  position:absolute;
-  animation:fall linear forwards;
-}
+.confetti-piece{position:absolute;animation:fall linear forwards;}
 
 @keyframes fall{
   0%{transform:translateY(-20px) rotate(0deg);opacity:1}
@@ -410,10 +383,7 @@ input[type=text]:focus,select:focus{
     <div class="topbar-inner">
       <div class="topbar-brand">
         <div class="topbar-logo">
-          <!--
-            Replace emoji with your logo:
-            <img src="mvgfc-logo.png" alt="MVGFC" style="width:26px;height:26px;object-fit:contain;">
-          -->
+          <!-- Replace with: <img src="mvgfc-logo.png" alt="MVGFC" style="width:26px;height:26px;object-fit:contain;"> -->
           🎓
         </div>
         <div>
@@ -421,7 +391,7 @@ input[type=text]:focus,select:focus{
           <div class="topbar-sub">Blended Learning Survey</div>
         </div>
       </div>
-      <div class="step-pill" id="step-pill">Step 1 of 5</div>
+      <div class="step-pill" id="step-pill">Step 1 of 6</div>
     </div>
     <div class="topbar-progress">
       <div class="progress-track">
@@ -431,25 +401,25 @@ input[type=text]:focus,select:focus{
     </div>
   </div>
 
-  <!-- Pages -->
   <div class="pages">
 
-    <!-- PAGE 0 — Privacy -->
+    <!-- ═══════════════════════════════
+         PAGE 0 — Privacy / Welcome
+    ═══════════════════════════════ -->
     <div class="page active" id="page-0">
       <div class="step-hero">
         <span class="step-emoji">👋</span>
-        <div class="step-title">Welcome, Scholar!</div>
+        <div class="step-title">Welcome, Gallegan!</div>
         <div class="step-desc">This quick survey helps MVGFC prepare the best blended learning experience for you.</div>
       </div>
-
       <div class="milestones">
         <div class="milestone active"></div>
         <div class="milestone"></div>
         <div class="milestone"></div>
         <div class="milestone"></div>
         <div class="milestone"></div>
+        <div class="milestone"></div>
       </div>
-
       <div class="card privacy">
         <div style="font-size:13px;font-weight:700;color:var(--g1);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
           🔒 Data Privacy Notice
@@ -468,29 +438,29 @@ input[type=text]:focus,select:focus{
       </div>
     </div>
 
-    <!-- PAGE 1 — Profile -->
+    <!-- ═══════════════════════════════
+         PAGE 1 — Student Profile
+    ═══════════════════════════════ -->
     <div class="page" id="page-1">
       <div class="step-hero">
         <span class="step-emoji">🧑‍🎓</span>
         <div class="step-title">Your Profile</div>
         <div class="step-desc">Tell us a little about yourself.</div>
       </div>
-
       <div class="milestones">
         <div class="milestone done"></div>
         <div class="milestone active"></div>
         <div class="milestone"></div>
         <div class="milestone"></div>
         <div class="milestone"></div>
+        <div class="milestone"></div>
       </div>
-
       <div class="card">
         <div class="field" id="field-name">
           <label class="field-label" for="full-name">Full Name <span class="req">*</span></label>
           <input type="text" id="full-name" placeholder="e.g. Juan Dela Cruz" autocomplete="name">
           <div class="err-msg">Please enter your full name.</div>
         </div>
-
         <div class="field" id="field-level">
           <label class="field-label" for="edu-level">Educational Level <span class="req">*</span></label>
           <select id="edu-level">
@@ -509,7 +479,6 @@ input[type=text]:focus,select:focus{
           </select>
           <div class="err-msg">Please select your level.</div>
         </div>
-
         <div class="field" id="field-transferee">
           <div class="field-label">Are you a transferee? <span class="req">*</span></div>
           <div class="toggle-group">
@@ -528,31 +497,32 @@ input[type=text]:focus,select:focus{
       </div>
     </div>
 
-    <!-- PAGE 2 — Devices -->
+    <!-- ═══════════════════════════════
+         PAGE 2 — Devices (Q1)
+    ═══════════════════════════════ -->
     <div class="page" id="page-2">
       <div class="step-hero">
         <span class="step-emoji">📱</span>
         <div class="step-title">Your Devices</div>
-        <div class="step-desc">What gadgets do you have for learning?</div>
+        <div class="step-desc">What devices do you have for blended learning?</div>
       </div>
-
       <div class="milestones">
         <div class="milestone done"></div>
         <div class="milestone done"></div>
         <div class="milestone active"></div>
         <div class="milestone"></div>
         <div class="milestone"></div>
+        <div class="milestone"></div>
       </div>
-
       <div class="card">
         <div class="field" id="field-devices">
-          <div class="field-label">Select all that apply <span class="req">*</span></div>
-          <div class="field-hint">Tap everything you have at home 👇</div>
+          <div class="field-label">Q1. What device/s do you have that you can use for blended learning? <span class="req">*</span></div>
+          <div class="field-hint">Check all that apply 👇</div>
           <div class="choice-grid" id="devices-group">
             <div class="choice-card" onclick="toggleCheck(this,'cb-phone')">
-              <input type="checkbox" id="cb-phone" name="devices" value="Mobile Phone">
+              <input type="checkbox" id="cb-phone" name="devices" value="Mobile Phone/Smartphone">
               <span class="choice-icon">📱</span>
-              <span class="choice-text">Mobile Phone</span>
+              <span class="choice-text">Mobile Phone / Smartphone</span>
               <span class="choice-check sq"></span>
             </div>
             <div class="choice-card" onclick="toggleCheck(this,'cb-laptop')">
@@ -564,7 +534,7 @@ input[type=text]:focus,select:focus{
             <div class="choice-card" onclick="toggleCheck(this,'cb-desktop')">
               <input type="checkbox" id="cb-desktop" name="devices" value="Desktop Computer">
               <span class="choice-icon">🖥️</span>
-              <span class="choice-text">Desktop</span>
+              <span class="choice-text">Desktop Computer</span>
               <span class="choice-check sq"></span>
             </div>
             <div class="choice-card" onclick="toggleCheck(this,'cb-tablet')">
@@ -580,36 +550,39 @@ input[type=text]:focus,select:focus{
               <span class="choice-check sq"></span>
             </div>
           </div>
-          <input type="text" class="other-input" id="dev-other-input" placeholder="Specify your device...">
+          <input type="text" class="other-input" id="dev-other-input" placeholder="Please specify...">
           <div class="err-msg">Please select at least one device.</div>
         </div>
       </div>
     </div>
 
-    <!-- PAGE 3 — Internet -->
+    <!-- ═══════════════════════════════
+         PAGE 3 — Internet (Q2 & Q3)
+    ═══════════════════════════════ -->
     <div class="page" id="page-3">
       <div class="step-hero">
         <span class="step-emoji">📡</span>
         <div class="step-title">Internet Access</div>
-        <div class="step-desc">Tell us about your connection at home.</div>
+        <div class="step-desc">Tell us about your connection at home and outside.</div>
       </div>
-
       <div class="milestones">
         <div class="milestone done"></div>
         <div class="milestone done"></div>
         <div class="milestone done"></div>
         <div class="milestone active"></div>
         <div class="milestone"></div>
+        <div class="milestone"></div>
       </div>
 
+      <!-- Q2: Primary source at home -->
       <div class="card">
         <div class="field" id="field-internet">
-          <div class="field-label">Main source of internet connection? <span class="req">*</span></div>
-          <div class="choice-grid" id="internet-group">
+          <div class="field-label">Q2. What is the primary source of internet connection in your home? <span class="req">*</span></div>
+          <div class="choice-grid single-col" id="internet-group">
             <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-wifi')">
-              <input type="radio" id="rb-wifi" name="internet" value="Wi-Fi">
+              <input type="radio" id="rb-wifi" name="internet" value="Home Wi-Fi">
               <span class="choice-icon">📶</span>
-              <span class="choice-text">Wi-Fi</span>
+              <span class="choice-text">Home Wi-Fi</span>
               <span class="choice-check"></span>
             </div>
             <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-data')">
@@ -624,6 +597,18 @@ input[type=text]:focus,select:focus{
               <span class="choice-text">Pocket Wi-Fi</span>
               <span class="choice-check"></span>
             </div>
+            <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-neighbor')">
+              <input type="radio" id="rb-neighbor" name="internet" value="Internet from a Neighbor/Relative">
+              <span class="choice-icon">🏘️</span>
+              <span class="choice-text">Internet from a Neighbor / Relative</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-nointernet')">
+              <input type="radio" id="rb-nointernet" name="internet" value="No Internet Connection at Home">
+              <span class="choice-icon">❌</span>
+              <span class="choice-text">No Internet Connection at Home</span>
+              <span class="choice-check"></span>
+            </div>
             <div class="choice-card" onclick="pickRadio(this,'internet-group','rb-int-other')">
               <input type="radio" id="rb-int-other" name="internet" value="Others" onchange="toggleOther('rb-int-other','int-other-input')">
               <span class="choice-icon">🔌</span>
@@ -631,31 +616,102 @@ input[type=text]:focus,select:focus{
               <span class="choice-check"></span>
             </div>
           </div>
-          <input type="text" class="other-input" id="int-other-input" placeholder="Specify your connection...">
+          <input type="text" class="other-input" id="int-other-input" placeholder="Please specify...">
           <div class="err-msg">Please select your internet source.</div>
         </div>
       </div>
 
+      <!-- Q3: Outside source -->
+      <div class="card">
+        <div class="field" id="field-outside-internet">
+          <div class="field-label">Q3. If you need internet access outside your home, what is your usual source? <span class="req">*</span></div>
+          <div class="choice-grid single-col" id="outside-internet-group">
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-pubwifi')">
+              <input type="radio" id="rb-pubwifi" name="outsideInternet" value="Public Wi-Fi">
+              <span class="choice-icon">🏪</span>
+              <span class="choice-text">Public Wi-Fi (e.g., mall, park, restaurant, coffee shop)</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-school')">
+              <input type="radio" id="rb-school" name="outsideInternet" value="School/Campus Internet">
+              <span class="choice-icon">🏫</span>
+              <span class="choice-text">School / Campus Internet</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-relative')">
+              <input type="radio" id="rb-relative" name="outsideInternet" value="Internet from a Relative's House">
+              <span class="choice-icon">🏠</span>
+              <span class="choice-text">Internet from a Relative's House</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-friend')">
+              <input type="radio" id="rb-friend" name="outsideInternet" value="Internet from a Friend's House">
+              <span class="choice-icon">👫</span>
+              <span class="choice-text">Internet from a Friend's House</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-cafe')">
+              <input type="radio" id="rb-cafe" name="outsideInternet" value="Internet Café/Computer Shop">
+              <span class="choice-icon">🖥️</span>
+              <span class="choice-text">Internet Café / Computer Shop</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-mobiledata')">
+              <input type="radio" id="rb-mobiledata" name="outsideInternet" value="Mobile Data">
+              <span class="choice-icon">📲</span>
+              <span class="choice-text">Mobile Data</span>
+              <span class="choice-check"></span>
+            </div>
+            <div class="choice-card" onclick="pickRadio(this,'outside-internet-group','rb-out-other')">
+              <input type="radio" id="rb-out-other" name="outsideInternet" value="Others" onchange="toggleOther('rb-out-other','out-other-input')">
+              <span class="choice-icon">🔌</span>
+              <span class="choice-text">Others</span>
+              <span class="choice-check"></span>
+            </div>
+          </div>
+          <input type="text" class="other-input" id="out-other-input" placeholder="Please specify...">
+          <div class="err-msg">Please select your outside internet source.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         PAGE 4 — Reliability (Q4)
+    ═══════════════════════════════ -->
+    <div class="page" id="page-4">
+      <div class="step-hero">
+        <span class="step-emoji">📊</span>
+        <div class="step-title">Connection Quality</div>
+        <div class="step-desc">How stable is your internet at home?</div>
+      </div>
+      <div class="milestones">
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone done"></div>
+        <div class="milestone active"></div>
+        <div class="milestone"></div>
+      </div>
       <div class="card">
         <div class="field" id="field-reliability">
-          <div class="field-label">How reliable is your connection? <span class="req">*</span></div>
+          <div class="field-label">Q4. How would you describe the reliability of your internet connection at home? <span class="req">*</span></div>
           <div class="choice-grid single-col" id="reliability-group">
             <div class="choice-card" onclick="pickRadio(this,'reliability-group','rb-vrel')">
               <input type="radio" id="rb-vrel" name="reliability" value="Very Reliable">
               <span class="choice-icon">🟢</span>
-              <span class="choice-text">Very Reliable — Always connected, fast</span>
+              <span class="choice-text">Very Reliable — Always available and stable</span>
               <span class="choice-check"></span>
             </div>
             <div class="choice-card" onclick="pickRadio(this,'reliability-group','rb-rel')">
               <input type="radio" id="rb-rel" name="reliability" value="Reliable">
               <span class="choice-icon">🟡</span>
-              <span class="choice-text">Reliable — Mostly works, occasional drops</span>
+              <span class="choice-text">Reliable — Usually available</span>
               <span class="choice-check"></span>
             </div>
             <div class="choice-card" onclick="pickRadio(this,'reliability-group','rb-unrel')">
               <input type="radio" id="rb-unrel" name="reliability" value="Unreliable">
               <span class="choice-icon">🔴</span>
-              <span class="choice-text">Unreliable — Frequent disconnections</span>
+              <span class="choice-text">Unreliable — Often disconnected or slow</span>
               <span class="choice-check"></span>
             </div>
           </div>
@@ -664,15 +720,17 @@ input[type=text]:focus,select:focus{
       </div>
     </div>
 
-    <!-- PAGE 4 — Learning Readiness -->
-    <div class="page" id="page-4">
+    <!-- ═══════════════════════════════
+         PAGE 5 — Learning Readiness (Q5 & Q6)
+    ═══════════════════════════════ -->
+    <div class="page" id="page-5">
       <div class="step-hero">
         <span class="step-emoji">🚀</span>
         <div class="step-title">Almost Done!</div>
         <div class="step-desc">Just two more quick questions.</div>
       </div>
-
       <div class="milestones">
+        <div class="milestone done"></div>
         <div class="milestone done"></div>
         <div class="milestone done"></div>
         <div class="milestone done"></div>
@@ -680,21 +738,22 @@ input[type=text]:focus,select:focus{
         <div class="milestone active"></div>
       </div>
 
+      <!-- Q5: Online Platforms -->
       <div class="card">
         <div class="field" id="field-platforms">
-          <div class="field-label">Do you know how to use online learning platforms? <span class="req">*</span></div>
-          <div class="field-hint">e.g. Google Classroom, Moodle, MS Teams</div>
+          <div class="field-label">Q5. Are you able to use online learning platforms? <span class="req">*</span></div>
+          <div class="field-hint">e.g. Google Classroom, Moodle, Microsoft Teams</div>
           <div class="choice-grid" id="platforms-group">
             <div class="choice-card" onclick="pickRadio(this,'platforms-group','rb-plt-yes')">
               <input type="radio" id="rb-plt-yes" name="platforms" value="Yes">
               <span class="choice-icon">✅</span>
-              <span class="choice-text">Yes, I do!</span>
+              <span class="choice-text">Yes</span>
               <span class="choice-check"></span>
             </div>
             <div class="choice-card" onclick="pickRadio(this,'platforms-group','rb-plt-no')">
               <input type="radio" id="rb-plt-no" name="platforms" value="No">
-              <span class="choice-icon">🤔</span>
-              <span class="choice-text">Not yet</span>
+              <span class="choice-icon">❌</span>
+              <span class="choice-text">No</span>
               <span class="choice-check"></span>
             </div>
           </div>
@@ -702,20 +761,21 @@ input[type=text]:focus,select:focus{
         </div>
       </div>
 
+      <!-- Q6: Suitable Place for Online Classes -->
       <div class="card">
-        <div class="field" id="field-quiet">
-          <div class="field-label">Do you have a quiet place to study at home? <span class="req">*</span></div>
-          <div class="choice-grid" id="quiet-group">
-            <div class="choice-card" onclick="pickRadio(this,'quiet-group','rb-q-yes')">
-              <input type="radio" id="rb-q-yes" name="quiet" value="Yes">
-              <span class="choice-icon">🤫</span>
-              <span class="choice-text">Yes, I do!</span>
+        <div class="field" id="field-suitable-place">
+          <div class="field-label">Q6. Do you have a suitable place at home where you can attend online classes and study? <span class="req">*</span></div>
+          <div class="choice-grid" id="suitable-place-group">
+            <div class="choice-card" onclick="pickRadio(this,'suitable-place-group','rb-sp-yes')">
+              <input type="radio" id="rb-sp-yes" name="suitablePlace" value="Yes">
+              <span class="choice-icon">🏡</span>
+              <span class="choice-text">Yes</span>
               <span class="choice-check"></span>
             </div>
-            <div class="choice-card" onclick="pickRadio(this,'quiet-group','rb-q-no')">
-              <input type="radio" id="rb-q-no" name="quiet" value="No">
-              <span class="choice-icon">🏠</span>
-              <span class="choice-text">Not really</span>
+            <div class="choice-card" onclick="pickRadio(this,'suitable-place-group','rb-sp-no')">
+              <input type="radio" id="rb-sp-no" name="suitablePlace" value="No">
+              <span class="choice-icon">😕</span>
+              <span class="choice-text">No</span>
               <span class="choice-check"></span>
             </div>
           </div>
@@ -728,8 +788,10 @@ input[type=text]:focus,select:focus{
       </div>
     </div>
 
-    <!-- PAGE 5 — Success -->
-    <div class="page" id="page-5">
+    <!-- ═══════════════════════════════
+         PAGE 6 — Success
+    ═══════════════════════════════ -->
+    <div class="page" id="page-6">
       <div class="success-wrap">
         <span class="trophy">🏆</span>
         <div class="success-title">Survey Complete!</div>
@@ -738,7 +800,6 @@ input[type=text]:focus,select:focus{
           <strong>Student Readiness for Blended Learning Survey.</strong><br><br>
           Your response has been recorded!
         </p>
-
         <div class="score-card">
           <div style="font-size:13px;font-weight:700;color:var(--g1);margin-bottom:12px;">🎯 Your Summary</div>
           <div class="score-row">
@@ -751,10 +812,9 @@ input[type=text]:focus,select:focus{
           </div>
           <div class="score-row">
             <span class="score-label">Steps Completed</span>
-            <span class="score-val">5 / 5 ✅</span>
+            <span class="score-val">6 / 6 ✅</span>
           </div>
         </div>
-
         <div style="font-size:13px;color:var(--muted);line-height:1.7;padding:0 8px;">
           MVGFC will use your responses to design a better blended learning experience for everyone. 💚
         </div>
@@ -763,7 +823,6 @@ input[type=text]:focus,select:focus{
 
   </div><!-- /pages -->
 
-  <!-- Bottom Nav -->
   <div class="bottom-nav" id="bottom-nav">
     <button class="btn-back" id="btn-back" onclick="goBack()" disabled>← Back</button>
     <button class="btn-next" id="btn-next" onclick="goNext()">
@@ -775,10 +834,10 @@ input[type=text]:focus,select:focus{
 </div>
 
 <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSTWeDd9CMjSFIQ0MpGAxYszISIJsRLHbnLNuI40S7-peVHjAOxLlWR_NHLsxxnBf3fA/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxS47BpPhLk43BG326zsaQMGrs1leTcQt4rNG9dY6GUh5a1XzdVlx726YjIzMbYIGbOyg/exec';
 
 let currentPage = 0;
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6; // pages 0–5 are survey; page 6 is success
 let transfereeVal = null;
 
 function updateTopBar() {
@@ -842,6 +901,9 @@ function pickRadio(card, groupId, rbId) {
   const rb = document.getElementById(rbId);
   rb.checked = true;
   rb.dispatchEvent(new Event('change'));
+  // Hide all "other" inputs in this group, then show if needed
+  const otherInputs = document.querySelectorAll('#' + groupId + ' ~ .other-input');
+  otherInputs.forEach(i => { i.style.display = 'none'; i.value = ''; });
 }
 
 function toggleOther(inputId, textId) {
@@ -899,18 +961,24 @@ function validatePage(page) {
 
   if (page === 3) {
     const net = !!document.querySelector('[name="internet"]:checked');
-    const rel = !!document.querySelector('[name="reliability"]:checked');
-    setErr('field-internet',    !net);
-    setErr('field-reliability', !rel);
-    if (!net || !rel) ok = false;
+    const out = !!document.querySelector('[name="outsideInternet"]:checked');
+    setErr('field-internet',         !net);
+    setErr('field-outside-internet', !out);
+    if (!net || !out) ok = false;
   }
 
   if (page === 4) {
+    const rel = !!document.querySelector('[name="reliability"]:checked');
+    setErr('field-reliability', !rel);
+    if (!rel) ok = false;
+  }
+
+  if (page === 5) {
     const plt = !!document.querySelector('[name="platforms"]:checked');
-    const qut = !!document.querySelector('[name="quiet"]:checked');
-    setErr('field-platforms', !plt);
-    setErr('field-quiet',     !qut);
-    if (!plt || !qut) ok = false;
+    const sp  = !!document.querySelector('[name="suitablePlace"]:checked');
+    setErr('field-platforms',     !plt);
+    setErr('field-suitable-place',!sp);
+    if (!plt || !sp) ok = false;
   }
 
   if (!ok) {
@@ -937,6 +1005,13 @@ function buildPayload() {
     internetSource = o ? 'Others: ' + o : 'Others';
   }
 
+  const outRb = document.querySelector('[name="outsideInternet"]:checked');
+  let outsideInternet = outRb ? outRb.value : '';
+  if (outsideInternet === 'Others') {
+    const o = document.getElementById('out-other-input').value.trim();
+    outsideInternet = o ? 'Others: ' + o : 'Others';
+  }
+
   return {
     fullName:            document.getElementById('full-name').value.trim(),
     educationalLevel:    document.getElementById('edu-level').value,
@@ -944,9 +1019,10 @@ function buildPayload() {
     previousSchool:      transfereeVal === 'yes' ? document.getElementById('prev-school').value.trim() : null,
     devices,
     internetSource,
+    outsideInternetSource: outsideInternet,
     internetReliability: document.querySelector('[name="reliability"]:checked')?.value || '',
     knowsPlatforms:      document.querySelector('[name="platforms"]:checked')?.value || '',
-    hasQuietPlace:       document.querySelector('[name="quiet"]:checked')?.value || '',
+    hasSuitablePlace:    document.querySelector('[name="suitablePlace"]:checked')?.value || '',
     submittedAt:         new Date().toISOString()
   };
 }
@@ -964,10 +1040,6 @@ async function submitSurvey() {
 
   const payload = buildPayload();
 
-  // ============================================================
-  // DATABASE SAVE — Google Sheets via Apps Script
-  // Replace APPS_SCRIPT_URL at the top with your deployed URL.
-  // ============================================================
   try {
     const res    = await fetch(APPS_SCRIPT_URL, {
       method:  'POST',
@@ -982,7 +1054,7 @@ async function submitSurvey() {
     document.getElementById('progress-fill').style.width = '100%';
     document.getElementById('progress-pct').textContent  = '100%';
 
-    showPage(5);
+    showPage(6);
     launchConfetti();
 
   } catch (err) {
@@ -992,9 +1064,6 @@ async function submitSurvey() {
     spin.style.display = 'none';
     label.textContent  = '🚀 Submit Survey';
   }
-  // ============================================================
-  // END DATABASE SAVE
-  // ============================================================
 }
 
 function launchConfetti() {
